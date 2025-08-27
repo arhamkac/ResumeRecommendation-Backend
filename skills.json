@@ -1,0 +1,178 @@
+{
+  "Building_Construction_resumes": {
+    "must_have": ["construction", "project management", "safety", "blueprint", "autocad", "estimation", "procurement"],
+    "good_to_have": ["bim", "procore", "civil engineering", "contract management", "osha", "quality control"]
+  },
+  "PMO_resumes": {
+    "must_have": ["pmo", "project management", "governance", "reporting", "stakeholder management", "methodology"],
+    "good_to_have": ["portfolio management", "risk management", "jira", "ms project", "pmp", "agile", "prince2"]
+  },
+  "Advocate_resumes": {
+    "must_have": ["legal", "litigation", "drafting", "legal research", "court", "case law", "jurisdiction"],
+    "good_to_have": ["arbitration", "corporate law", "compliance", "due diligence", "contract law"]
+  },
+  "Designing_resumes": {
+    "must_have": ["figma", "sketch", "adobe xd", "ui", "ux", "wireframe", "prototyping", "user interface"],
+    "good_to_have": ["photoshop", "illustrator", "user research", "design system", "adobe creative suite"]
+  },
+  "Apparel_resumes": {
+    "must_have": ["fashion", "merchandising", "textile", "garment", "pattern making", "sourcing", "fabric"],
+    "good_to_have": ["supply chain", "cad", "quality control", "production", "fashion design"]
+  },
+  "Database_resumes": {
+    "must_have": ["sql", "database management", "oracle", "mysql", "t-sql", "pl/sql", "database design"],
+    "good_to_have": ["nosql", "mongodb", "performance tuning", "etl", "data modeling", "postgresql"]
+  },
+  "Avian_resumes": {
+    "must_have": ["avian", "poultry", "husbandry", "hatchery", "biosecurity", "flock management"],
+    "good_to_have": ["veterinary", "nutrition", "ornithology", "disease control", "breeding"]
+  },
+  "Information_Technology_resumes": {
+    "must_have": ["it support", "networking", "troubleshooting", "system administration", "tcp/ip", "active directory"],
+    "good_to_have": ["cybersecurity", "cloud", "aws", "azure", "scripting", "powershell", "linux"]
+  },
+  "Blockchain_resumes": {
+    "must_have": ["blockchain", "solidity", "ethereum", "smart contract", "cryptography", "dapp"],
+    "good_to_have": ["web3", "hyperledger", "rust", "node.js", "decentralized finance", "defi"]
+  },
+  "Electrical_Engineering_resumes": {
+    "must_have": ["electrical engineering", "circuits", "autocad", "plc", "power systems", "electronics"],
+    "good_to_have": ["matlab", "microcontrollers", "pcb design", "control systems", "vfd"]
+  },
+  "Mechanical_Engineer_resumes": {
+    "must_have": ["mechanical engineering", "autocad", "solidworks", "thermodynamics", "cad", "manufacturing"],
+    "good_to_have": ["ansys", "catia", "fea", "hvac", "product design", "robotics"]
+  },
+  "Web_Designing_resumes": {
+    "must_have": ["html", "css", "javascript", "responsive design", "ui", "ux", "photoshop"],
+    "good_to_have": ["figma", "sketch", "jquery", "bootstrap", "web accessibility", "seo"]
+  },
+  "Data_Science_resumes": {
+    "must_have": ["data science", "python", "r", "machine learning", "statistics", "sql", "data analysis"],
+    "good_to_have": ["tensorflow", "pytorch", "scikit-learn", "pandas", "numpy", "deep learning", "big data"]
+  },
+  "Testing_resumes": {
+    "must_have": ["qa", "testing", "test cases", "selenium", "jira", "manual testing", "automation testing"],
+    "good_to_have": ["api testing", "postman", "junit", "performance testing", "agile", "istqb"]
+  },
+  "Network_Security_Engineer_resumes": {
+    "must_have": ["network security", "firewall", "cisco", "vpn", "tcp/ip", "intrusion detection", "ids/ips"],
+    "good_to_have": ["cybersecurity", "penetration testing", "wireshark", "siem", "ccna", "cissp"]
+  },
+  "Aviation_resumes": {
+    "must_have": ["aviation", "aircraft", "faa", "flight operations", "aviation safety", "air traffic control"],
+    "good_to_have": ["airline", "avionics", "a&p license", "crew scheduling", "ground handling"]
+  },
+  "Banking_resumes": {
+    "must_have": ["banking", "finance", "loans", "customer service", "retail banking", "compliance"],
+    "good_to_have": ["wealth management", "credit analysis", "risk management", "aml", "kyc"]
+  },
+  "Arts_resumes": {
+    "must_have": ["art", "curation", "gallery", "exhibition", "visual arts", "art history"],
+    "good_to_have": ["fine arts", "painting", "sculpture", "art conservation", "grant writing"]
+  },
+  "Public_Relations_resumes": {
+    "must_have": ["public relations", "pr", "media relations", "press release", "communications", "social media"],
+    "good_to_have": ["crisis management", "corporate communications", "event management", "copywriting"]
+  },
+  "Sales_resumes": {
+    "must_have": ["sales", "business development", "b2b", "b2c", "lead generation", "crm", "negotiation"],
+    "good_to_have": ["salesforce", "account management", "cold calling", "sales strategy", "closing"]
+  },
+  "BPO_resumes": {
+    "must_have": ["bpo", "customer service", "voice process", "call center", "customer support", "communication"],
+    "good_to_have": ["kpo", "sla", "quality analysis", "team handling", "technical support"]
+  },
+  "ETL_Developer_resumes": {
+    "must_have": ["etl", "data warehousing", "sql", "informatica", "ssis", "data integration"],
+    "good_to_have": ["talend", "datastage", "python", "aws glue", "azure data factory", "big data"]
+  },
+  "Education_resumes": {
+    "must_have": ["teaching", "education", "curriculum", "lesson planning", "classroom management"],
+    "good_to_have": ["e-learning", "pedagogy", "special education", "student assessment"]
+  },
+  "HR_resumes": {
+    "must_have": ["human resources", "hr", "recruitment", "onboarding", "employee relations", "payroll"],
+    "good_to_have": ["performance management", "hris", "talent acquisition", "compensation", "benefits"]
+  },
+  "SAP_Developer_resumes": {
+    "must_have": ["sap", "abap", "sap hana", "erp", "module", "fico", "sd", "mm"],
+    "good_to_have": ["sapui5", "fiori", "sap basis", "s/4hana", "sap bw"]
+  },
+  "DotNet_Developer_resumes": {
+    "must_have": [".net", "c#", "asp.net", "mvc", "sql server", "visual studio"],
+    "good_to_have": [".net core", "azure", "web api", "entity framework", "blazor", "javascript"]
+  },
+  "Automobile_resumes": {
+    "must_have": ["automobile", "automotive", "mechanical", "vehicle", "engine", "manufacturing"],
+    "good_to_have": ["autocad", "catia", "electric vehicle", "ev", "quality control", "assembly"]
+  },
+  "Health_Fitness_resumes": {
+    "must_have": ["fitness", "personal training", "nutrition", "exercise", "health", "wellness"],
+    "good_to_have": ["cpr", "yoga", "group fitness", "strength training", "anatomy"]
+  },
+  "Operations_Manager_resumes": {
+    "must_have": ["operations", "management", "logistics", "supply chain", "kpi", "process improvement"],
+    "good_to_have": ["six sigma", "lean", "budgeting", "inventory management", "procurement"]
+  },
+  "Java_Developer_resumes": {
+    "must_have": ["java", "spring", "hibernate", "sql", "api", "rest", "maven"],
+    "good_to_have": ["springboot", "microservices", "aws", "docker", "kubernetes", "kafka"]
+  },
+  "SQL_Developer_resumes": {
+    "must_have": ["sql", "t-sql", "pl/sql", "ssis", "ssrs", "database", "stored procedures"],
+    "good_to_have": ["performance tuning", "etl", "sql server", "oracle", "data modeling"]
+  },
+  "PBO_resumes": {
+    "must_have": ["pbo", "business operations", "process", "reporting", "analysis"],
+    "good_to_have": ["financial planning", "strategic planning", "kpi", "analytics"]
+  },
+  "DevOps_Engineer_resumes": {
+    "must_have": ["devops", "aws", "azure", "docker", "kubernetes", "ci/cd", "jenkins", "git"],
+    "good_to_have": ["terraform", "ansible", "python", "scripting", "monitoring", "prometheus"]
+  },
+  "Finance_resumes": {
+    "must_have": ["finance", "accounting", "excel", "financial analysis", "budgeting", "forecasting"],
+    "good_to_have": ["tally", "gst", "financial modeling", "quickbooks", "sap", "auditing"]
+  },
+  "Digital_Media_resumes": {
+    "must_have": ["digital media", "social media", "seo", "sem", "google analytics", "content creation"],
+    "good_to_have": ["google ads", "facebook ads", "email marketing", "content strategy", "photoshop"]
+  },
+  "Python_Developer_resumes": {
+    "must_have": ["python", "django", "flask", "api", "rest", "sql", "git"],
+    "good_to_have": ["docker", "aws", "celery", "postgresql", "fastapi", "pandas"]
+  },
+  "Food_Beverages_resumes": {
+    "must_have": ["food and beverage", "f&b", "hospitality", "restaurant", "inventory", "customer service"],
+    "good_to_have": ["hotel management", "haccp", "kitchen", "menu planning", "cost control"]
+  },
+  "Consultant_resumes": {
+    "must_have": ["consulting", "stakeholder management", "client", "analysis", "problem solving", "presentation"],
+    "good_to_have": ["strategy", "management", "business analysis", "project management", "powerpoint"]
+  },
+  "Architects_resumes": {
+    "must_have": ["architecture", "autocad", "revit", "sketchup", "building design", "construction documents"],
+    "good_to_have": ["bim", "3ds max", "v-ray", "lumion", "sustainable design", "leed"]
+  },
+  "React_Developer_resumes": {
+    "must_have": ["react", "javascript", "html", "css", "redux", "api", "git"],
+    "good_to_have": ["next.js", "typescript", "node.js", "graphql", "jest", "webpack"]
+  },
+  "Management_resumes": {
+    "must_have": ["management", "leadership", "team", "budgeting", "strategy", "operations"],
+    "good_to_have": ["project management", "kpi", "p&l", "stakeholder", "business development"]
+  },
+  "Agricultural_resumes": {
+    "must_have": ["agriculture", "farming", "crop", "harvesting", "soil", "irrigation"],
+    "good_to_have": ["agronomy", "horticulture", "livestock", "precision agriculture", "gis"]
+  },
+  "Business_Analyst_resumes": {
+    "must_have": ["business analysis", "requirements gathering", "sql", "agile", "jira", "use cases"],
+    "good_to_have": ["brd", "frd", "uml", "visio", "data analysis", "stakeholder management"]
+  },
+  "Civil_Engineer_resumes": {
+    "must_have": ["civil engineering", "autocad", "structural", "construction", "site", "surveying"],
+    "good_to_have": ["staad pro", "revit", "gis", "project management", "transportation"]
+  }
+}
