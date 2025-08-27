@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const userSchema=new Schema(
     {
@@ -17,8 +18,17 @@ const userSchema=new Schema(
         },
         refreshToken:{
             type:String
+        },
+        otp:{
+            type:String
+        },
+        otpExpiry:{
+            type:Date
+        },
+        otpVerified:{
+            type:Boolean
         }
-    }
+    },{timestamps:true}
 )
 
 userSchema.pre('save',async function(next){
@@ -50,7 +60,7 @@ userSchema.methods.generateRefreshToken=async function(next){
             _id:this._id
         },
         process.env.REFRESH_TOKEN_SECRET,{
-            expiresIn:process.env.REFRESH_TOKEN_SECRET
+            expiresIn:process.env.REFRESH_TOKEN_EXPIRY
         }
     )
 }

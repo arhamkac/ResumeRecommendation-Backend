@@ -2,22 +2,26 @@ import {asyncHandler} from '../utils/asyncHandler.js'
 import { User } from '../models/user.model.js'
 import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
+import {otpSender,generateOTP} from '../middleware/otp.middleware.js'   
+const otp=generateOTP();                                                                                      
 
-const generateAccessAndRefreshToken=asyncHandler(async(userId)=>{
+const generateAccessAndRefreshToken=async(userId)=>{
     try {
         const user=await User.findById(userId)
         if(!user){
             throw new ApiError(400,"Can't generate access and refresh token without user login")
         }
-        const accessToken=user.generateAccessToken();
-        const refreshToken=user.generateRefreshToken();
-        user.accessToken=accessToken;
-        await user.save({validateBeforeSave:false})
+        const [accessToken, refreshToken] = await Promise.all([
+            user.generateAccessToken(),
+            user.generateRefreshToken()
+        ]);
+        user.refreshToken=refreshToken;
+        await user.save({validateBeforeSave:false});
         return {accessToken,refreshToken};
     } catch (error) {
-        throw new ApiError(400,`Error in generating access and refresh tokens ${error}`)
+        throw new ApiError(400,"Error in generating access and refresh tokens ",error)
     }
-})
+}
 
 const registerUser=asyncHandler(async(req,res)=>{
     const {username,email,password}=req.body
@@ -55,7 +59,7 @@ const registerUser=asyncHandler(async(req,res)=>{
 
 const loginUser=asyncHandler(async(req,res)=>{
     const {username,password}=req.body
-    if([username,password].some((field)=>field.trim()==="")){
+    if([username,password].some((field)=>field?.trim()==="")){
         throw new ApiError(400,"Username and password are required to login")
     }
 
@@ -64,10 +68,13 @@ const loginUser=asyncHandler(async(req,res)=>{
         throw new ApiError(400,"Error in finding user")
     }
 
-    const passwordCorrect=await User.isPasswordCorrect(password)
+    const passwordCorrect=await user.isPasswordCorrect(password)
     if(!passwordCorrect){
         throw new ApiError(400,"The password entered is incorrect")
     }
+
+    const {accessToken,refreshToken}=await generateAccessAndRefreshToken(user._id);
+
     const loggedInuser=await User.findById(user._id).select("-password -refreshToken")
     const options={
     httpOnly:true,
@@ -163,4 +170,55 @@ const refreshAccessToken=asyncHandler(async(req,res)=>{
 
 })
 
-export {registerUser,logOutUser,loginUser,refreshAccessToken,generateAccessAndRefreshToken}
+const sendOTP=asyncHandler(async(req,res)=>{
+  const {emailId}=req.body;
+  if(!emailId){
+    throw new ApiError(400,"Unauthorized user")
+  }
+  
+  await otpSender(otp,emailId);
+  const user=await User.findOne({email:emailId})
+  if(!user){
+    throw new ApiError(404,"No such user exists")
+  }
+  const currOTP=otp
+  user.otp=currOTP
+  user.otpExpiry=Date.now()+5*60*1000
+  await user.save({validateBeforeSave:false})
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(200,{},"Sent OTP")
+  )
+})
+
+const verifyOTP=asyncHandler(async(req,res)=>{
+  const {emailId,receivedOTP}=req.body
+  if(!emailId||!receivedOTP){
+    throw new ApiError(404,"Can't proceed without otp and email entering")
+  }
+
+  const user=await User.findOne({email:emailId})
+
+  if(receivedOTP!=user.otp){
+    throw new ApiError(400,"OTP passed is invalid")
+  }
+  if(receivedOTP==user.otp && Date.now()>user.otpExpiry){
+    throw new ApiError(400,"OTP has expired")
+  }
+
+  await user.updateOne(
+    {
+      $set:{OTPVerified:1}
+    }
+  )
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(200,{},"OTP verified successfully")
+  )
+})
+
+export {registerUser,logOutUser,loginUser,refreshAccessToken,generateAccessAndRefreshToken,sendOTP,verifyOTP}

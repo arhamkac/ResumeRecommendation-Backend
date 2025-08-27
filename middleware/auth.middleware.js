@@ -3,9 +3,13 @@ import {ApiError} from '../utils/ApiError.js'
 import jwt from 'jsonwebtoken'
 import { User } from '../models/user.model.js'
 
-const verifyJWT=asyncHandler(async(req,_,next)=>{
+const verifyJWT=asyncHandler(async(req,res,next)=>{
     try {
-        const token=req.cookies?.accessToken||req.header("Authorization").replace("Bearer ","")
+        console.log("--- DEBUGGING JWT ---");
+        console.log("Cookie value received:", req.cookies?.accessToken);
+        console.log("Type of cookie value:", typeof req.cookies?.accessToken);
+        console.log("---------------------");
+        const token=req.cookies?.accessToken||req.header("Authorization")?.replace("Bearer ","")
         if(!token){
             throw new ApiError(500,"Authorization error")
         }
@@ -17,7 +21,8 @@ const verifyJWT=asyncHandler(async(req,_,next)=>{
         req.user=user
         next();
     } catch (error) {
-        throw new ApiError(400,`Athurization error ${error}`)
+        console.log("Error message ",error.message)
+        throw new ApiError(400,`Athurization error`)
     }
 })
 
