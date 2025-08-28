@@ -14,7 +14,7 @@ const userSchema=new Schema(
         },
         password:{
             type:String,
-            required:true
+            required: function() { return this.provider === "local"; }
         },
         refreshToken:{
             type:String
@@ -27,6 +27,19 @@ const userSchema=new Schema(
         },
         otpVerified:{
             type:Boolean
+        },
+        googleId: {
+            type: String,
+            unique: true,
+            sparse: true
+        },
+        provider: {
+            type: String,
+            enum: ["local", "google"],
+            default: "local"
+        },
+        picture: {
+            type: String
         }
     },{timestamps:true}
 )

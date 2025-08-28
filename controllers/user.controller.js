@@ -3,7 +3,9 @@ import { User } from '../models/user.model.js'
 import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import {otpSender,generateOTP} from '../middleware/otp.middleware.js'   
-const otp=generateOTP();                                                                                      
+import { OAuth2Client } from 'google-auth-library'
+const otp=generateOTP();                
+const client=new OAuth2Client(process.env.GOOGLE_CLIENT_ID);                                                                      
 
 const generateAccessAndRefreshToken=async(userId)=>{
     try {
@@ -221,4 +223,48 @@ const verifyOTP=asyncHandler(async(req,res)=>{
   )
 })
 
-export {registerUser,logOutUser,loginUser,refreshAccessToken,generateAccessAndRefreshToken,sendOTP,verifyOTP}
+const googleLoginUser=asyncHandler(async(req,res)=>{
+  // console.log("Google routes hit")
+  const {idToken}=req.body
+  if(!idToken){
+    throw new ApiError(400,"Google token id is required")
+  }
+
+  const ticket=await client.verifyIdToken({
+    idToken,
+    audience:process.env.GOOGLE_CLIENT_ID
+  })
+  const payload=ticket.getPayload();
+  const {email,name,picture,sub}=payload;
+
+  let user=await User.findOne({email:email})
+  if(!user){
+    user=await User.create({
+      email:email,
+      googleId:sub,
+      username:name,
+      provider:"google",
+      picture,
+      otpVerified:true
+    })
+  }
+
+   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
+
+   const options = {
+    httpOnly: true,
+    secure: true,
+    };
+
+    return res
+    .status(200)
+    .cookie("accessToken",accessToken,options)
+    .cookie("refreshToken",refreshToken,options)
+    .json(
+      new ApiResponse(200,{ user: { id: user._id, email: user.email, username: user.username, picture: user.picture }, accessToken, refreshToken },
+      "Google login successful")
+    )
+
+})
+
+export {registerUser,logOutUser,loginUser,refreshAccessToken,generateAccessAndRefreshToken,sendOTP,verifyOTP,googleLoginUser}
