@@ -5,7 +5,7 @@ import { ApiResponse } from '../utils/ApiResponse.js'
 import {otpSender,generateOTP} from '../middleware/otp.middleware.js'   
 import { OAuth2Client } from 'google-auth-library'
 const otp=generateOTP();                
-const client=new OAuth2Client(process.env.GOOGLE_CLIENT_ID);                                                                      
+const client=new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_SECRET);                                                                      
 
 const generateAccessAndRefreshToken=async(userId)=>{
     try {
@@ -224,8 +224,10 @@ const verifyOTP=asyncHandler(async(req,res)=>{
 })
 
 const googleLoginUser=asyncHandler(async(req,res)=>{
-  // console.log("Google routes hit")
+  console.log("Google routes hit")
   const {idToken}=req.body
+  console.log(req.body)
+  console.log(idToken)
   if(!idToken){
     throw new ApiError(400,"Google token id is required")
   }
@@ -253,7 +255,8 @@ const googleLoginUser=asyncHandler(async(req,res)=>{
 
    const options = {
     httpOnly: true,
-    secure: true,
+    sameSite:"lax",
+    secure: process.env.NODE_ENV === "production"
     };
 
     return res
