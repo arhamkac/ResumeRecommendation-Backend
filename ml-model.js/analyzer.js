@@ -34,7 +34,7 @@ async function getDocumentEmbedding(text, extractor) {
     return finalEmbedding;
 }
 
-{/* This is the most crucial part. Here I calculated cosine similarity to match the matching vectors veasily rather than normal keyword matching */}
+{/* This is the most crucial part. Here I calculated cosine similarity to match the matching vectors easily rather than normal keyword matching */}
 function cosineSimilarity(vecA, vecB) {
     let dotProduct = 0.0, normA = 0.0, normB = 0.0;
     for (let i = 0; i < vecA.length; i++) {

@@ -60,14 +60,43 @@ const registerUser=asyncHandler(async(req,res)=>{
 })
 
 const loginUser=asyncHandler(async(req,res)=>{
-    const {username,password}=req.body
+    const {username,email,password}=req.body
     if([username,password].some((field)=>field?.trim()==="")){
         throw new ApiError(400,"Username and password are required to login")
     }
 
     const user=await User.findOne({username:username})
     if(!user){
+        const createdUser=await User.findOne({email:email})
+        if(!createdUser){
         throw new ApiError(400,"Error in finding user")
+        }
+      
+        const passwordCorrect=await createdUser.isPasswordCorrect(password)
+    if(!passwordCorrect){
+        throw new ApiError(400,"The password entered is incorrect")
+    }
+
+    const {accessToken,refreshToken}=await generateAccessAndRefreshToken(createdUser._id);
+
+    const loggedInuser=await User.findById(createdUser._id).select("-password -refreshToken")
+    const options={
+    httpOnly:true,
+    secure:true
+    }
+
+  return res
+  .status(200)
+  .cookie("accessToken",accessToken,options)
+  .cookie("refreshToken",refreshToken,options)
+  .json(
+    new ApiResponse(
+      200,
+      {user:loggedInuser,accessToken,refreshToken},
+      "User logged in successfully"
+    )
+  )
+
     }
 
     const passwordCorrect=await user.isPasswordCorrect(password)
@@ -224,9 +253,9 @@ const verifyOTP=asyncHandler(async(req,res)=>{
 })
 
 const googleLoginUser=asyncHandler(async(req,res)=>{
-  console.log("Google routes hit")
+  // console.log("Google routes hit")
   const {idToken}=req.body
-  console.log(req.body)
+  // console.log(req.body)
   console.log(idToken)
   if(!idToken){
     throw new ApiError(400,"Google token id is required")
@@ -258,7 +287,7 @@ const googleLoginUser=asyncHandler(async(req,res)=>{
     sameSite:"lax",
     secure: process.env.NODE_ENV === "production"
     };
-
+  
     return res
     .status(200)
     .cookie("accessToken",accessToken,options)
